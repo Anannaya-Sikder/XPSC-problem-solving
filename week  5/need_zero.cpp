@@ -1,34 +1,38 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define long long
+
 int main() {
-   ios::sync_with_stdio(false);
-   cin.tie(nullptr);
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
-   int t;
-   cin >> t;
-   while (t--) {
-      int n, XOR = 0;
-      cin >> n;
-      vector<int> a(n);
-      for (int i = 0; i < n; i++) {
-         cin >> a[i];
-         XOR ^= a[i];
-      }
+    int t;
+    cin >> t;
 
-      int ans = -1;
-      for (int x = 0; x < (1 << 8); x++) {
-         int currXOR = 0;
-         for (int i = 0; i < n; i++) {
-            currXOR ^= (a[i] ^ x);
-         }
-         if (currXOR == 0) {
-            ans = x;
-            break;
-         }
-      }
+    while (t--) {
+        int n;
+        cin >> n;
 
-      cout << ans << '\n';
-   }
-   return 0;
+        vector<int> a(n);
+        for (int i = 0; i < n; i++) {
+            cin >> a[i];
+        }
+
+        int result = -1;
+        for (int x = 0; x < 256; x++) {
+            int xor_sum = 0;
+            for (int i = 0; i < n; i++) {
+                xor_sum ^= (a[i] ^ x);
+            }
+            if (xor_sum == 0) {
+                result = x;
+                break;
+            }
+        }
+
+        cout << result << endl;
+    }
+
+    return 0;
 }
